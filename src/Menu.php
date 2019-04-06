@@ -13,33 +13,8 @@ class Menu extends Widget
 	public $templateActiveItem = '@vendor/andrewdanilov/yii2-menu/src/views/menu/active-item';
 	public $items = [];
 
-	public $route;
-	public $params;
-
-	private $noDefaultRoute;
-	private $noDefaultAction;
-
 	public function run()
 	{
-		if ($this->route === null && Yii::$app->controller !== null) {
-			$this->route = Yii::$app->controller->getRoute();
-		}
-		if ($this->params === null) {
-			$this->params = Yii::$app->request->getQueryParams();
-		}
-		$posDefaultAction = strpos($this->route, Yii::$app->controller->defaultAction);
-		if ($posDefaultAction) {
-			$this->noDefaultAction = rtrim(substr($this->route, 0, $posDefaultAction), '/');
-		} else {
-			$this->noDefaultAction = false;
-		}
-		$posDefaultRoute = strpos($this->route, Yii::$app->controller->module->defaultRoute);
-		if ($posDefaultRoute) {
-			$this->noDefaultRoute = rtrim(substr($this->route, 0, $posDefaultRoute), '/');
-		} else {
-			$this->noDefaultRoute = false;
-		}
-
 		$parent_items = [];
 		foreach ($this->items as $parent_item) {
 			$items = [];
@@ -71,18 +46,34 @@ class Menu extends Widget
 	protected function isItemActive($item)
 	{
 		if (isset($item['url']) && is_array($item['url']) && isset($item['url'][0])) {
+			$currentRoute = Yii::$app->controller->getRoute();
+			$currentParams = Yii::$app->request->getQueryParams();
+
+			$posDefaultAction = strpos($currentRoute, Yii::$app->controller->defaultAction);
+			if ($posDefaultAction) {
+				$noDefaultAction = rtrim(substr($currentRoute, 0, $posDefaultAction), '/');
+			} else {
+				$noDefaultAction = false;
+			}
+			$posDefaultRoute = strpos($currentRoute, Yii::$app->controller->module->defaultRoute);
+			if ($posDefaultRoute) {
+				$noDefaultRoute = rtrim(substr($currentRoute, 0, $posDefaultRoute), '/');
+			} else {
+				$noDefaultRoute = false;
+			}
+
 			$route = $item['url'][0];
 			if (isset($route[0]) && $route[0] !== '/' && Yii::$app->controller) {
 				$route = ltrim(Yii::$app->controller->module->getUniqueId() . '/' . $route, '/');
 			}
 			$route = ltrim($route, '/');
-			if ($route != $this->route && $route !== $this->noDefaultRoute && $route !== $this->noDefaultAction) {
+			if ($route != $currentRoute && $route !== $noDefaultRoute && $route !== $noDefaultAction) {
 				return false;
 			}
 			unset($item['url']['#']);
 			if (count($item['url']) > 1) {
 				foreach (array_splice($item['url'], 1) as $name => $value) {
-					if ($value !== null && (!isset($this->params[$name]) || $this->params[$name] != $value)) {
+					if ($value !== null && (!isset($currentParams[$name]) || $currentParams[$name] != $value)) {
 						return false;
 					}
 				}
