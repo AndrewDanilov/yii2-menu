@@ -2,88 +2,71 @@
 
 namespace andrewdanilov\menu;
 
+use yii\base\Widget;
+
 /**
- * Обертка для виджета хлебных крошек.
- * Позволяет задать класс для всех ссылок в хлебных крошках.
- * Использование:
- *	<?= Breadcrumbs::widget([
- *		'links' => $this->params['breadcrumbs'] ?? [],
- *		'link_class' => 'breadcrumb-item',
- *		'itemTemplate' => '<li>{link}</li>',
- *		'activeItemTemplate' => '<li>{link}</li>',
- *		'homeLink' => ['label' => 'Главная', 'url' => ['site/index']],
- *      // Отключить ссылку на главную
- *		// 'homeLink' => false,
- *		'tag' => 'ul',
- *		'options' => [
- *          'class' => 'breadcrumbs',
- *      ],
- *	]) ?>
+ * Breadcrumbs
  *
- * Class Breadcrumbs
- * @package frontend\components
+ * Use:
+ *  <?= Breadcrumbs::widget([
+ *		'templateWrapper' => '@frontend/views/site/breadcrumbs/wrapper',
+ *		'templateItem' => '@frontend/views/site/breadcrumbs/item',
+ *		'templateActiveItem' => '@frontend/views/site/breadcrumbs/active-item',
+ *		'showHome' => true, // default fasle
+ *		'homeLabel' => 'Main',
+ *		'homeUrl' => ['site/index'],
+ *		'items' => [
+ *          ['label' => 'Category', 'url' => ['site/category']],
+ *          ['label' => 'Subcategory', 'url' => ['site/subcategory']],
+ *          ['label' => 'Product #1'], // or short ['Product #1']
+ *      ],
+ *  ]) ?>
+ *
+ * All parameters are optional.
  */
 
-class Breadcrumbs extends \yii\widgets\Breadcrumbs
+class Breadcrumbs extends Widget
 {
-	public $link_class;
-
-	/**
-	 * @inheritdoc
-	 */
-	public function init()
-	{
-		if (!isset($this->itemTemplate)) {
-			$this->itemTemplate = '{link}<div class="breadcrumb-divider"></div>';
-		}
-		if (!isset($this->activeItemTemplate)) {
-			$this->activeItemTemplate = '<div class="breadcrumb-item">{link}</div>';
-		}
-		if (!isset($this->homeLink)) {
-			$this->homeLink = false;
-		}
-		if (!isset($this->tag)) {
-			$this->tag = 'div';
-		}
-		if (!isset($this->options['class'])) {
-			$this->options['class'] = 'breadcrumbs';
-		}
-		if (!isset($this->link_class)) {
-			$this->link_class = 'breadcrumb-item';
-		}
-		parent::init();
-	}
+	public $templateWrapper = '@vendor/andrewdanilov/yii2-menu/src/views/breadcrumbs/wrapper';
+	public $templateItem = '@vendor/andrewdanilov/yii2-menu/src/views/breadcrumbs/item';
+	public $templateActiveItem = '@vendor/andrewdanilov/yii2-menu/src/views/breadcrumbs/active-item';
+	public $showHome = false;
+	public $homeLabel = 'Главная';
+	public $homeUrl = ['/'];
+	public $items = [];
 
 	/**
 	 * @inheritdoc
 	 */
 	public function run()
 	{
-		if (empty($this->links)) {
+		if ($this->showHome) {
+			array_unshift($this->items, ['label' => $this->homeLabel, 'url' => $this->homeUrl]);
+		}
+		if (count($this->items) < 2) {
 			return '';
 		}
-		if (is_array($this->homeLink) && isset($this->homeLink['url'])) {
-			$this->homeLink['class'] = $this->link_class;
+
+		// convert last element short notation to normal
+		// and remove url from it, if it has one.
+		$lastItem = array_pop($this->items);
+		if (is_string($lastItem)) {
+			$lastItem = ['label' => $lastItem];
 		}
-		foreach ($this->links as &$link) {
-			if (is_array($link) && isset($link['url'])) {
-				$link['class'] = $this->link_class;
+		unset($lastItem['url']);
+		array_push($this->items, $lastItem);
+
+		$out = [];
+		foreach ($this->items as $item) {
+			if (is_array($item) && isset($item['label'])) {
+				if (isset($item['url'])) {
+					$out[] = $this->render($this->templateItem, $item);
+				} else {
+					$out[] = $this->render($this->templateActiveItem, $item);
+				}
 			}
 		}
-		unset($link);
 
-		// если крошка одна или их нет, то не выводим ничего
-		if (!$this->homeLink && count($this->links) < 2 || count($this->links) < 1) {
-			return '';
-		}
-
-		// удаляем ссылку у последнего элемента крошек (если есть)
-		$last_link = array_pop($this->links);
-		if (isset($last_link['url'])) {
-			unset($last_link['url']);
-		}
-		array_push($this->links, $last_link);
-
-		return parent::run();
+		return $this->render($this->templateWrapper, ['content' => implode('', $out)]);
 	}
 }

@@ -7,5 +7,4 @@
 use yii\helpers\Url;
 
 ?>
-
-<a href="<?= Url::to($url) ?>" class="footer-menu-link" <?php if ($target) { ?>target="<?= $target ?>"<?php } ?>><?= $label ?></a>
+<a class="breadcrumb-item" href="<?= Url::to($url) ?>"><?= $label ?></a>
