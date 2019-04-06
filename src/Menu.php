@@ -1,10 +1,35 @@
 <?php
-
 namespace andrewdanilov\menu;
 
 use Yii;
 use yii\base\Widget;
 
+/**
+ * Menu
+ * Use:
+ *  <?= andrewdanilov\menu\Menu::widget([
+ *      'templateWrapper' => '@frontend/views/site/menu/wrapper',
+ *      'templateParentItem' => '@frontend/views/site/menu/parent-item',
+ *      'templateItem' => '@frontend/views/site/menu/item',
+ *      'templateActiveItem' => '@frontend/views/site/menu/active-item',
+ *      'items' => [
+ *          [
+ *				'label' => 'Menu item 1',
+ *				'items' => [
+ *					['label' => 'Menu subitem 1', 'url' => ['site/action1'], 'target' => '_blank],
+ *					['label' => 'Menu subitem 2', 'url' => ['site/action2']],
+ *				],
+ *			],
+ *			[
+ *				'label' => 'Menu item 2',
+ *				'items' => [
+ *					['label' => 'Menu subitem 3', 'url' => ['site/action3']],
+ *					['label' => 'Menu subitem 4', 'url' => ['site/action4']],
+ *				],
+ *			],
+ *		],
+ *  ]) ?>
+ */
 class Menu extends Widget
 {
 	public $templateWrapper = '@vendor/andrewdanilov/yii2-menu/src/views/menu/wrapper';

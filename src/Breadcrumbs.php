@@ -1,5 +1,4 @@
 <?php
-
 namespace andrewdanilov\menu;
 
 use yii\base\Widget;
@@ -8,7 +7,7 @@ use yii\base\Widget;
  * Breadcrumbs
  *
  * Use:
- *  <?= Breadcrumbs::widget([
+ *  <?= andrewdanilov\menu\Breadcrumbs::widget([
  *		'templateWrapper' => '@frontend/views/site/breadcrumbs/wrapper',
  *		'templateItem' => '@frontend/views/site/breadcrumbs/item',
  *		'templateActiveItem' => '@frontend/views/site/breadcrumbs/active-item',
