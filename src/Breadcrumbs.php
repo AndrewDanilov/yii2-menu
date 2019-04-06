@@ -6,7 +6,7 @@ namespace andrewdanilov\menu;
  * Обертка для виджета хлебных крошек.
  * Позволяет задать класс для всех ссылок в хлебных крошках.
  * Использование:
- *	echo Breadcrumbs::widget([
+ *	<?= Breadcrumbs::widget([
  *		'links' => $this->params['breadcrumbs'] ?? [],
  *		'link_class' => 'breadcrumb-item',
  *		'itemTemplate' => '<li>{link}</li>',
@@ -18,7 +18,7 @@ namespace andrewdanilov\menu;
  *		'options' => [
  *          'class' => 'breadcrumbs',
  *      ],
- *	]);
+ *	]) ?>
  *
  * Class Breadcrumbs
  * @package frontend\components
@@ -33,13 +33,25 @@ class Breadcrumbs extends \yii\widgets\Breadcrumbs
 	 */
 	public function init()
 	{
+		if (!isset($this->itemTemplate)) {
+			$this->itemTemplate = '{link}<div class="breadcrumb-divider"></div>';
+		}
+		if (!isset($this->activeItemTemplate)) {
+			$this->activeItemTemplate = '<div class="breadcrumb-item">{link}</div>';
+		}
+		if (!isset($this->homeLink)) {
+			$this->homeLink = false;
+		}
+		if (!isset($this->tag)) {
+			$this->tag = 'div';
+		}
+		if (!isset($this->options['class'])) {
+			$this->options['class'] = 'breadcrumbs';
+		}
+		if (!isset($this->link_class)) {
+			$this->link_class = 'breadcrumb-item';
+		}
 		parent::init();
-		$this->itemTemplate = '{link}<div class="breadcrumb-divider"></div>';
-		$this->activeItemTemplate = '<div class="breadcrumb-item">{link}</div>';
-		$this->homeLink = false;
-		$this->tag = 'div';
-		$this->options = ['class' => 'breadcrumbs'];
-		$this->link_class = 'breadcrumb-item';
 	}
 
 	/**
