@@ -26,9 +26,9 @@ use yii\base\Widget;
 
 class Breadcrumbs extends Widget
 {
-	public $templateWrapper = '@vendor/andrewdanilov/yii2-menu/src/views/breadcrumbs/wrapper';
-	public $templateItem = '@vendor/andrewdanilov/yii2-menu/src/views/breadcrumbs/item';
-	public $templateActiveItem = '@vendor/andrewdanilov/yii2-menu/src/views/breadcrumbs/active-item';
+	public $templateWrapper = '@andrewdanilov/menu/views/breadcrumbs/wrapper';
+	public $templateItem = '@andrewdanilov/menu/views/breadcrumbs/item';
+	public $templateActiveItem = '@andrewdanilov/menu/views/breadcrumbs/active-item';
 	public $showHome = false;
 	public $homeLabel = 'Главная';
 	public $homeUrl = ['/'];

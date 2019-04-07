@@ -32,10 +32,10 @@ use yii\base\Widget;
  */
 class Menu extends Widget
 {
-	public $templateWrapper = '@vendor/andrewdanilov/yii2-menu/src/views/menu/wrapper';
-	public $templateParentItem = '@vendor/andrewdanilov/yii2-menu/src/views/menu/parent-item';
-	public $templateItem = '@vendor/andrewdanilov/yii2-menu/src/views/menu/item';
-	public $templateActiveItem = '@vendor/andrewdanilov/yii2-menu/src/views/menu/active-item';
+	public $templateWrapper = '@andrewdanilov/menu/views/menu/wrapper';
+	public $templateParentItem = '@andrewdanilov/menu/views/menu/parent-item';
+	public $templateItem = '@andrewdanilov/menu/views/menu/item';
+	public $templateActiveItem = '@andrewdanilov/menu/views/menu/active-item';
 	public $items = [];
 
 	public function run()

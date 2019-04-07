@@ -6,7 +6,7 @@ use yii\web\AssetBundle;
 
 class MobileMenuAsset extends AssetBundle
 {
-	public $sourcePath = '@vendor/andrewdanilov/yii2-menu/src/web';
+	public $sourcePath = '@andrewdanilov/menu/web';
 	public $css = [
 		'css/jquery.mmenu.all.css',
 		'css/mobile-menu.css',

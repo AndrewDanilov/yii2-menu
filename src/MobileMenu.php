@@ -33,11 +33,11 @@ use andrewdanilov\adminpanel\MobileMenuAsset;
  */
 class MobileMenu extends Menu
 {
-	public $templateWrapper = '@vendor/andrewdanilov/yii2-menu/src/views/mobile-menu/wrapper';
-	public $templateParentItem = '@vendor/andrewdanilov/yii2-menu/src/views/mobile-menu/parent-item';
-	public $templateItem = '@vendor/andrewdanilov/yii2-menu/src/views/mobile-menu/item';
-	public $templateActiveItem = '@vendor/andrewdanilov/yii2-menu/src/views/mobile-menu/active-item';
-	public $templateButton = '@vendor/andrewdanilov/yii2-menu/src/views/mobile-menu/button';
+	public $templateWrapper = '@andrewdanilov/menu/views/mobile-menu/wrapper';
+	public $templateParentItem = '@andrewdanilov/menu/views/mobile-menu/parent-item';
+	public $templateItem = '@andrewdanilov/menu/views/mobile-menu/item';
+	public $templateActiveItem = '@andrewdanilov/menu/views/mobile-menu/active-item';
+	public $templateButton = '@andrewdanilov/menu/views/mobile-menu/button';
 	public $buttonLabel = '';
 	public $items = [];
 
