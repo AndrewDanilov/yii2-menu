@@ -8,3 +8,4 @@ use yii\helpers\Url;
 
 ?>
 <a class="breadcrumb-item" href="<?= Url::to($url) ?>"><?= $label ?></a>
+<span class="breadcrumb-divider">&gt;</span>
