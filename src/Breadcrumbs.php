@@ -11,7 +11,7 @@ use yii\base\Widget;
  *		'templateWrapper' => '@frontend/views/site/breadcrumbs/wrapper',
  *		'templateItem' => '@frontend/views/site/breadcrumbs/item',
  *		'templateActiveItem' => '@frontend/views/site/breadcrumbs/active-item',
- *		'showHome' => true, // default fasle
+ *		'showHome' => false, // default true
  *		'homeLabel' => 'Main',
  *		'homeUrl' => ['site/index'],
  *		'items' => [
@@ -29,7 +29,7 @@ class Breadcrumbs extends Widget
 	public $templateWrapper = '@andrewdanilov/menu/views/breadcrumbs/wrapper';
 	public $templateItem = '@andrewdanilov/menu/views/breadcrumbs/item';
 	public $templateActiveItem = '@andrewdanilov/menu/views/breadcrumbs/active-item';
-	public $showHome = false;
+	public $showHome = true;
 	public $homeLabel = 'Главная';
 	public $homeUrl = ['/'];
 	public $items = [];
