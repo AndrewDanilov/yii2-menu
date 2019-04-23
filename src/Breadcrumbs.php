@@ -35,6 +35,17 @@ class Breadcrumbs extends Widget
 	public $items = [];
 
 	/**
+	 * @inheritDoc
+	 */
+	public function init()
+	{
+		parent::init();
+		if (!is_array($this->items)) {
+			$this->items = [];
+		}
+	}
+
+	/**
 	 * @inheritdoc
 	 */
 	public function run()
