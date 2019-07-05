@@ -4,4 +4,4 @@
 /* @var $label string */
 
 ?>
-<span class="breadcrumb-item"><?= $label ?></span>
+<span class="breadcrumb-item breadcrumb-active"><?= $label ?></span>
