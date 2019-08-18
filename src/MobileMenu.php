@@ -6,7 +6,7 @@ use andrewdanilov\adminpanel\MobileMenuAsset;
 /**
  * MobileMenu
  * Use:
- *  <?= andrewdanilov\menu\Menu::widget([
+ *  <?= andrewdanilov\menu\MobileMenu::widget([
  *      'templateWrapper' => '@frontend/views/site/menu/wrapper',
  *      'templateParentItem' => '@frontend/views/site/menu/parent-item',
  *      'templateItem' => '@frontend/views/site/menu/item',
