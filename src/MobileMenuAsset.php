@@ -1,5 +1,5 @@
 <?php
-namespace andrewdanilov\adminpanel;
+namespace andrewdanilov\menu;
 
 use yii\web\AssetBundle;
 
