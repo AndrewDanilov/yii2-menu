@@ -72,6 +72,8 @@ __Mobile menu__
 				['label' => 'Menu subitem 4', 'url' => ['site/action4']],
 			],
 		],
+        ['label' => 'Menu item 3', 'url' => ['site/action3'], 'target' => '_blank'],
+		['label' => 'Menu item 4', 'url' => ['site/action4']],
 	],
 ]) ?>
 ```

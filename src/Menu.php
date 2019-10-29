@@ -42,18 +42,29 @@ class Menu extends Widget
 	{
 		$parent_items = [];
 		foreach ($this->items as $parent_item) {
-			$items = [];
-			foreach ($parent_item['items'] as $item) {
-				if (!isset($item['target'])) {
-					$item['target'] = null;
+			if (isset($parent_item['items'])) {
+				$items = [];
+				foreach ($parent_item['items'] as $item) {
+					if (!isset($item['target'])) {
+						$item['target'] = null;
+					}
+					if ($this->isItemActive($item)) {
+						$items[] = $this->render($this->templateActiveItem, ['url' => $item['url'], 'label' => $item['label'], 'target' => $item['target']]);
+					} else {
+						$items[] = $this->render($this->templateItem, ['url' => $item['url'], 'label' => $item['label'], 'target' => $item['target']]);
+					}
 				}
-				if ($this->isItemActive($item)) {
-					$items[] = $this->render($this->templateActiveItem, ['url' => $item['url'], 'label' => $item['label'], 'target' => $item['target']]);
+				$parent_items[] = $this->render($this->templateParentItem, ['label' => $parent_item['label'], 'content' => implode('', $items)]);
+			} else {
+				if (!isset($parent_item['target'])) {
+					$parent_item['target'] = null;
+				}
+				if ($this->isItemActive($parent_item)) {
+					$parent_items[] = $this->render($this->templateActiveItem, ['url' => $parent_item['url'], 'label' => $parent_item['label'], 'target' => $parent_item['target']]);
 				} else {
-					$items[] = $this->render($this->templateItem, ['url' => $item['url'], 'label' => $item['label'], 'target' => $item['target']]);
+					$parent_items[] = $this->render($this->templateItem, ['url' => $parent_item['url'], 'label' => $parent_item['label'], 'target' => $parent_item['target']]);
 				}
 			}
-			$parent_items[] = $this->render($this->templateParentItem, ['label' => $parent_item['label'], 'content' => implode('', $items)]);
 		}
 		return $this->render($this->templateWrapper, ['content' => implode('', $parent_items)]);
 	}
