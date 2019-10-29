@@ -1,8 +1,6 @@
 <?php
 namespace andrewdanilov\menu;
 
-use andrewdanilov\menu\MobileMenuAsset;
-
 /**
  * MobileMenu
  * Use:
