@@ -51,14 +51,14 @@ __Mobile menu__
 
 ```php
 <?= andrewdanilov\menu\MobileMenu::widget([
-    'templateWrapper' => '@frontend/views/site/menu/wrapper',
-    'templateParentItem' => '@frontend/views/site/menu/parent-item',
-    'templateItem' => '@frontend/views/site/menu/item',
-    'templateActiveItem' => '@frontend/views/site/menu/active-item',
-    'templateButton' => '@frontend/views/site/menu/button',
-    'buttonLabel' => 'Menu',
-    'items' => [
-        [
+	'templateWrapper' => '@frontend/views/site/menu/wrapper',
+	'templateParentItem' => '@frontend/views/site/menu/parent-item',
+	'templateItem' => '@frontend/views/site/menu/item',
+	'templateActiveItem' => '@frontend/views/site/menu/active-item',
+	'templateButton' => '@frontend/views/site/menu/button',
+	'buttonLabel' => 'Menu',
+	'items' => [
+		[
 			'label' => 'Menu item 1',
 			'items' => [
 				['label' => 'Menu subitem 1', 'url' => ['site/action1'], 'target' => '_blank'],
@@ -72,7 +72,7 @@ __Mobile menu__
 				['label' => 'Menu subitem 4', 'url' => ['site/action4']],
 			],
 		],
-        ['label' => 'Menu item 3', 'url' => ['site/action3'], 'target' => '_blank'],
+		['label' => 'Menu item 3', 'url' => ['site/action3'], 'target' => '_blank'],
 		['label' => 'Menu item 4', 'url' => ['site/action4']],
 	],
 ]) ?>
