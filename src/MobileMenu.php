@@ -1,7 +1,7 @@
 <?php
 namespace andrewdanilov\menu;
 
-use andrewdanilov\adminpanel\MobileMenuAsset;
+use andrewdanilov\menu\MobileMenuAsset;
 
 /**
  * MobileMenu
