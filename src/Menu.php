@@ -16,7 +16,7 @@ use yii\base\Widget;
  *          [
  *				'label' => 'Menu item 1',
  *				'items' => [
- *					['label' => 'Menu subitem 1', 'url' => ['site/action1'], 'target' => '_blank],
+ *					['label' => 'Menu subitem 1', 'url' => ['site/action1'], 'target' => '_blank'],
  *					['label' => 'Menu subitem 2', 'url' => ['site/action2']],
  *				],
  *			],
