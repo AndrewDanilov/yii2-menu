@@ -51,12 +51,12 @@ __Menu__
 
 ```php
 <?= andrewdanilov\menu\Menu::widget([
-    'templateWrapper' => '@frontend/views/site/menu/wrapper',
-    'templateParentItem' => '@frontend/views/site/menu/parent-item',
-    'templateItem' => '@frontend/views/site/menu/item',
-    'templateActiveItem' => '@frontend/views/site/menu/active-item',
-    'items' => [
-        [
+	'templateWrapper' => '@frontend/views/site/menu/wrapper',
+	'templateParentItem' => '@frontend/views/site/menu/parent-item',
+	'templateItem' => '@frontend/views/site/menu/item',
+	'templateActiveItem' => '@frontend/views/site/menu/active-item',
+	'items' => [
+		[
 			'label' => 'Menu item 1',
 			'items' => [
 				['label' => 'Menu subitem 1', 'url' => ['site/action1'], 'target' => '_blank'],
