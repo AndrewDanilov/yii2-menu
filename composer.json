@@ -2,7 +2,7 @@
     "name": "andrewdanilov/yii2-menu",
     "description": "Menu tools",
     "type": "yii2-extension",
-    "keywords": ["yii2","extension","menu","breadcrumbs"],
+    "keywords": ["yii2","extension","menu","mobile menu","mmenu"],
     "license": "MIT",
     "authors": [
         {

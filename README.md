@@ -1,6 +1,6 @@
 Menu tools
 ===================
-Various tools for constructing menus, breadcrumbs, etc.
+Various tools for constructing menus, mobile menus, etc.
 
 Installation
 ------------
@@ -10,42 +10,24 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-composer require andrewdanilov/yii2-menu "~1.0.0"
+composer require andrewdanilov/yii2-menu "~2.0.0"
 ```
 
 or add
 
 ```
-"andrewdanilov/yii2-menu": "~1.0.0"
+"andrewdanilov/yii2-menu": "~2.0.0"
 ```
 
-to the require section of your `composer.json` file.
+to the `require` section of your `composer.json` file.
 
+Changes
+-----
+
+Breadcrumbs widget in version 2.0.0 was removed and became a standalone extension [yii2-breadcrumbs](https://github.com/AndrewDanilov/yii2-breadcrumbs)
 
 Usage
 -----
-
-__Breadcrumbs__
-
-Widget let you create breadcrumbs in simialar way as the default yii breadcrumbs widget, but
-with help of template files. You can define templates separetely for wrapper, link item and for
-active (last) breadcrumb item.
-
-```php
-<?= andrewdanilov\menu\Breadcrumbs::widget([
-	'templateWrapper' => '@frontend/views/site/breadcrumbs/wrapper',
-	'templateItem' => '@frontend/views/site/breadcrumbs/item',
-	'templateActiveItem' => '@frontend/views/site/breadcrumbs/active-item',
-	'showHome' => false, // default true
-	'homeLabel' => 'Main',
-	'homeUrl' => ['site/index'],
-	'items' => [
-		['label' => 'Category', 'url' => ['site/category']],
-		['label' => 'Subcategory', 'url' => ['site/subcategory']],
-		['label' => 'Product #1'], // or short ['Product #1']
-	],
-]) ?>
-```
 
 __Menu__
 
