@@ -3,6 +3,7 @@
 /* @var $this \yii\web\View */
 /* @var $label string */
 /* @var $url string|array */
+/* @var $target string */
 
 use yii\helpers\Url;
 
