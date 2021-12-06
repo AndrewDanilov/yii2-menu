@@ -1,10 +1,12 @@
 <?php
 
-/* @var $this \yii\web\View */
+/* @var $this View */
 /* @var $content string */
+
+use yii\web\View;
 
 ?>
 
-<div class="menu">
+<ul class="menu">
 	<?= $content ?>
-</div>
+</ul>

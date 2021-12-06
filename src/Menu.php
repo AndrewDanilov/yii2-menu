@@ -6,29 +6,8 @@ use yii\base\Widget;
 
 /**
  * Menu
- * Use:
- *  <?= andrewdanilov\menu\Menu::widget([
- *      'templateWrapper' => '@frontend/views/site/menu/wrapper',
- *      'templateParentItem' => '@frontend/views/site/menu/parent-item',
- *      'templateItem' => '@frontend/views/site/menu/item',
- *      'templateActiveItem' => '@frontend/views/site/menu/active-item',
- *      'items' => [
- *          [
- *				'label' => 'Menu item 1',
- *				'items' => [
- *					['label' => 'Menu subitem 1', 'url' => ['site/action1'], 'target' => '_blank'],
- *					['label' => 'Menu subitem 2', 'url' => ['site/action2']],
- *				],
- *			],
- *			[
- *				'label' => 'Menu item 2',
- *				'items' => [
- *					['label' => 'Menu subitem 3', 'url' => ['site/action3']],
- *					['label' => 'Menu subitem 4', 'url' => ['site/action4']],
- *				],
- *			],
- *		],
- *  ]) ?>
+ *
+ * @see https://github.com/AndrewDanilov/yii2-menu
  */
 class Menu extends Widget
 {
@@ -45,25 +24,46 @@ class Menu extends Widget
 			if (isset($parent_item['items'])) {
 				$items = [];
 				foreach ($parent_item['items'] as $item) {
+					if ($this->isItemActive($item)) {
+						$templateItem = $this->templateActiveItem;
+					} else {
+						$templateItem = $this->templateItem;
+					}
 					if (!isset($item['target'])) {
 						$item['target'] = null;
 					}
-					if ($this->isItemActive($item)) {
-						$items[] = $this->render($this->templateActiveItem, ['url' => $item['url'], 'label' => $item['label'], 'target' => $item['target']]);
-					} else {
-						$items[] = $this->render($this->templateItem, ['url' => $item['url'], 'label' => $item['label'], 'target' => $item['target']]);
-					}
+					$items[] = $this->render($templateItem, [
+						'label' => $item['label'],
+						'url' => $item['url'],
+						'target' => $item['target'],
+					]);
 				}
-				$parent_items[] = $this->render($this->templateParentItem, ['label' => $parent_item['label'], 'content' => implode('', $items)]);
-			} else {
+				if (!isset($parent_item['url'])) {
+					$parent_item['url'] = null;
+				}
 				if (!isset($parent_item['target'])) {
 					$parent_item['target'] = null;
 				}
+				$parent_items[] = $this->render($this->templateParentItem, [
+					'label' => $parent_item['label'],
+					'url' => $parent_item['url'],
+					'target' => $parent_item['target'],
+					'content' => implode('', $items),
+				]);
+			} else {
 				if ($this->isItemActive($parent_item)) {
-					$parent_items[] = $this->render($this->templateActiveItem, ['url' => $parent_item['url'], 'label' => $parent_item['label'], 'target' => $parent_item['target']]);
+					$templateItem = $this->templateActiveItem;
 				} else {
-					$parent_items[] = $this->render($this->templateItem, ['url' => $parent_item['url'], 'label' => $parent_item['label'], 'target' => $parent_item['target']]);
+					$templateItem = $this->templateItem;
 				}
+				if (!isset($parent_item['target'])) {
+					$parent_item['target'] = null;
+				}
+				$parent_items[] = $this->render($templateItem, [
+					'label' => $parent_item['label'],
+					'url' => $parent_item['url'],
+					'target' => $parent_item['target'],
+				]);
 			}
 		}
 		return $this->render($this->templateWrapper, ['content' => implode('', $parent_items)]);

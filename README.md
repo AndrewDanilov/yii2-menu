@@ -39,19 +39,29 @@ __Menu__
 	'templateActiveItem' => '@frontend/views/site/menu/active-item',
 	'items' => [
 		[
-			'label' => 'Menu item 1',
-			'items' => [
-				['label' => 'Menu subitem 1', 'url' => ['site/action1'], 'target' => '_blank'],
+			'label' => 'Menu item 1', // required
+			'items' => [ // optional
+				[
+				    'label' => 'Menu subitem 1', // required
+				    'url' => ['site/action1'], // required for single menu items
+				    'target' => '_blank', // optional
+				],
 				['label' => 'Menu subitem 2', 'url' => ['site/action2']],
 			],
 		],
 		[
 			'label' => 'Menu item 2',
+			'url' => ['site/action3'], // optional for items has submenu
 			'items' => [
-				['label' => 'Menu subitem 3', 'url' => ['site/action3']],
-				['label' => 'Menu subitem 4', 'url' => ['site/action4']],
+				['label' => 'Menu subitem 3', 'url' => ['site/action4']],
+				['label' => 'Menu subitem 4', 'url' => ['site/action5']],
 			],
 		],
+		[
+		    'label' => 'Menu item 3',
+			'url' => ['site/action6'],
+			'target' => '_blank',
+        ],
 	],
 ]) ?>
 ```

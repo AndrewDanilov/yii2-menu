@@ -1,16 +1,23 @@
 <?php
 
-/* @var $this \yii\web\View */
+/* @var $this View */
 /* @var $label string */
+/* @var $url string|array */
+/* @var $target string */
 /* @var $content string */
+
+use yii\helpers\Url;
+use yii\web\View;
 
 ?>
 
-<div class="parent-item">
-	<div class="parent-header"><?= $label ?></div>
-	<div class="parent-wrapper">
-
+<li>
+	<?php if ($url) { ?>
+		<a href="<?= Url::to($url) ?>" <?php if ($target) { ?>target="<?= $target ?>"<?php } ?>><?= $label ?></a>
+	<?php } else { ?>
+		<span><?= $label ?></span>
+	<?php } ?>
+	<ul>
 		<?= $content ?>
-
-	</div>
-</div>
+	</ul>
+</li>
