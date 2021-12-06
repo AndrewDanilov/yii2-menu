@@ -81,40 +81,59 @@ class Menu extends Widget
 	 */
 	protected function isItemActive($item)
 	{
-		if (isset($item['url']) && is_array($item['url']) && isset($item['url'][0])) {
-			$currentRoute = Yii::$app->controller->getRoute();
-			$currentParams = Yii::$app->request->getQueryParams();
+		if (isset($item['url'])) {
+			if (is_array($item['url'])) {
+				if (!isset($item['url'][0])) {
+					return false;
+				}
+				$currentRoute = Yii::$app->controller->getRoute();
+				$currentParams = Yii::$app->request->getQueryParams();
 
-			$posDefaultAction = strpos($currentRoute, Yii::$app->controller->defaultAction);
-			if ($posDefaultAction) {
-				$noDefaultAction = rtrim(substr($currentRoute, 0, $posDefaultAction), '/');
-			} else {
-				$noDefaultAction = false;
-			}
-			$posDefaultRoute = strpos($currentRoute, Yii::$app->controller->module->defaultRoute);
-			if ($posDefaultRoute) {
-				$noDefaultRoute = rtrim(substr($currentRoute, 0, $posDefaultRoute), '/');
-			} else {
-				$noDefaultRoute = false;
-			}
+				$posDefaultAction = strpos($currentRoute, Yii::$app->controller->defaultAction);
+				if ($posDefaultAction) {
+					$noDefaultAction = rtrim(substr($currentRoute, 0, $posDefaultAction), '/');
+				} else {
+					$noDefaultAction = false;
+				}
+				$posDefaultRoute = strpos($currentRoute, Yii::$app->controller->module->defaultRoute);
+				if ($posDefaultRoute) {
+					$noDefaultRoute = rtrim(substr($currentRoute, 0, $posDefaultRoute), '/');
+				} else {
+					$noDefaultRoute = false;
+				}
 
-			$route = $item['url'][0];
-			if (isset($route[0]) && $route[0] !== '/' && Yii::$app->controller) {
-				$route = ltrim(Yii::$app->controller->module->getUniqueId() . '/' . $route, '/');
-			}
-			$route = ltrim($route, '/');
-			if ($route != $currentRoute && $route !== $noDefaultRoute && $route !== $noDefaultAction) {
-				return false;
-			}
-			unset($item['url']['#']);
-			if (count($item['url']) > 1) {
-				foreach (array_splice($item['url'], 1) as $name => $value) {
-					if ($value !== null && (!isset($currentParams[$name]) || $currentParams[$name] != $value)) {
-						return false;
+				$route = $item['url'][0];
+				if (isset($route[0]) && $route[0] !== '/' && Yii::$app->controller) {
+					$route = ltrim(Yii::$app->controller->module->getUniqueId() . '/' . $route, '/');
+				}
+				$route = ltrim($route, '/');
+				if ($route != $currentRoute && $route !== $noDefaultRoute && $route !== $noDefaultAction) {
+					return false;
+				}
+				unset($item['url']['#']);
+				if (count($item['url']) > 1) {
+					foreach (array_splice($item['url'], 1) as $name => $value) {
+						if ($value !== null && (!isset($currentParams[$name]) || $currentParams[$name] != $value)) {
+							return false;
+						}
 					}
 				}
+				return true;
+			} elseif (is_string($item['url'])) {
+				if (strpos($item['url'], $_SERVER['HTTP_HOST']) !== false) {
+					$url_parts = explode($_SERVER['HTTP_HOST'], $item['url']);
+					$item['url'] = $url_parts[1];
+				}
+				if (!$item['url'] || $item['url'] === '/') {
+					if (Yii::$app->request->url === '/') {
+						return true;
+					}
+					return false;
+				}
+				if (strpos(Yii::$app->request->url, $item['url']) === 0) {
+					return true;
+				}
 			}
-			return true;
 		}
 		return false;
 	}
