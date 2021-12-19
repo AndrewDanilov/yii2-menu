@@ -14,15 +14,27 @@ class MobileMenu extends Menu
 	public $templateActiveItem = '@andrewdanilov/menu/views/mobile-menu/active-item';
 	public $templateButton = '@andrewdanilov/menu/views/mobile-menu/button';
 	public $buttonLabel = '';
+	public $wrapperId = 'mobile_menu';
+	public $showNavbar = false;
 	public $items = [];
 
 	public function run()
 	{
+		$view = $this->getView();
 		MobileMenuAsset::register($this->getView());
 
-		$menu = parent::run();
-		$menu = $this->render($this->templateButton, ['label' => $this->buttonLabel]) . $menu;
+		if ($this->wrapperId) {
+			$view->registerJs('andrewdanilov.mobileMenu.wrapperId = "' . $this->wrapperId . '";');
+		}
+		if ($this->showNavbar) {
+			$view->registerJs('andrewdanilov.mobileMenu.showNavbar = true;');
+		}
+		$view->registerJs('andrewdanilov.mobileMenu.init();');
 
-		return $menu;
+		$menu = parent::run();
+		return $this->render($this->templateButton, [
+			'wrapperId' => $this->wrapperId,
+			'label' => $this->buttonLabel,
+		]) . $menu;
 	}
 }

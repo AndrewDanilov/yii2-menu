@@ -15,6 +15,7 @@ class Menu extends Widget
 	public $templateParentItem = '@andrewdanilov/menu/views/menu/parent-item';
 	public $templateItem = '@andrewdanilov/menu/views/menu/item';
 	public $templateActiveItem = '@andrewdanilov/menu/views/menu/active-item';
+	public $wrapperId = 'menu';
 	public $items = [];
 
 	public function run()
@@ -66,7 +67,10 @@ class Menu extends Widget
 				]);
 			}
 		}
-		return $this->render($this->templateWrapper, ['content' => implode('', $parent_items)]);
+		return $this->render($this->templateWrapper, [
+			'wrapperId' => $this->wrapperId,
+			'content' => implode('', $parent_items),
+		]);
 	}
 
 	/**
@@ -82,6 +86,9 @@ class Menu extends Widget
 	protected function isItemActive($item)
 	{
 		if (isset($item['url'])) {
+			if (is_array($item['url']) && count($item['url']) == 1 && reset($item['url']) == '/') {
+				$item['url'] = '/';
+			}
 			if (is_array($item['url'])) {
 				if (!isset($item['url'][0])) {
 					return false;

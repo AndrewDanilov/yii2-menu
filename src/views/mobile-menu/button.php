@@ -1,8 +1,9 @@
 <?php
 
 /* @var $this \yii\web\View */
+/* @var $wrapperId string */
 /* @var $label string */
 
 ?>
 
-<a href="#mobile-menu" class="mobile-menu-button"><?= $label ?></a>
+<a href="#<?= $wrapperId ?>" class="mobile-menu-button"><?= $label ?></a>

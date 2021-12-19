@@ -1,11 +1,14 @@
 <?php
 
-/* @var $this \yii\web\View */
+/* @var $this View */
+/* @var $wrapperId string */
 /* @var $content string */
+
+use yii\web\View;
 
 ?>
 <div style="display: none;">
-	<div id="mobile-menu">
+	<div id="<?= $wrapperId ?>">
 		<ul>
 			<?= $content ?>
 		</ul>
