@@ -40,7 +40,7 @@ __Menu__
     'templateParentItem' => '@frontend/views/site/_blocks/menu/parent-item',
     'templateItem' => '@frontend/views/site/_blocks/menu/item',
     'templateActiveItem' => '@frontend/views/site/_blocks/menu/active-item',
-    'wrapperId' => 'my_menu' // optional, default is 'menu'
+    'wrapperId' => 'my_menu', // optional, default is 'menu'
     'items' => [
         [
             'label' => 'Menu item 1', // required
@@ -80,7 +80,7 @@ __Mobile menu__
     'templateActiveItem' => '@frontend/views/site/_blocks/mobile-menu/active-item',
     'templateButton' => '@frontend/views/site/_blocks/mobile-menu/button',
     'buttonLabel' => 'Menu', // optional, default is ''
-    'wrapperId' => 'my_mobile_menu' // optional, default is 'mobile_menu'
+    'wrapperId' => 'my_mobile_menu', // optional, default is 'mobile_menu'
     'showNavbar' => true, // optional, default is false
     'items' => [
         [
